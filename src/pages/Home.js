@@ -23,10 +23,14 @@ function Home() {
   };
   async function sendEmail() {
     try {
-      API.post("api/email/send", data, {
+      const res = await API.post("api/email/send", data, {
         headers: headers,
       });
-      navigate("/outbox");
+      if (res.status == 202) {
+        navigate("/outbox");
+      } else {
+        alert("something went wrong.");
+      }
     } catch (error) {
       if (error.response.status === 401 || token === "") {
         navigate("/login");
