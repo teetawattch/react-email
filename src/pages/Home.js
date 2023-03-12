@@ -39,7 +39,6 @@ function Home() {
   useEffect(() => {
     if (token === "" || localStorage.length === 0) {
       navigate("/login");
-      
     }
   });
   return (
@@ -49,11 +48,6 @@ function Home() {
       <div className="content">
         <div className="header">
           <h2>New Email</h2>
-          <h5 className="note">
-            Note: Emails will be sent to recipients by the sender's email
-            address (teetawat.tch), but the sender's name will be taken from
-            your name.
-          </h5>
         </div>
         <div className="form">
           <input

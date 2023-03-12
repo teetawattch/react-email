@@ -4,20 +4,20 @@ import API from "../api/api";
 
 function Navbar() {
   const [username, setUsername] = useState();
-  const token = localStorage.getItem("token");
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
-  async function showUser() {
-    const res = await API.post("api/auth/me", "", { headers });
-    const data = await res.data;
-    setUsername(data.name);
-  }
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
+    async function showUser() {
+      const res = await API.post("api/auth/me", "", { headers });
+      const data = await res.data;
+      setUsername(data.name);
+    }
     showUser();
-  });
+  }, []);
   return (
     <ul className="navbar row">
       <div className="logo">
