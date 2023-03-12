@@ -3,7 +3,7 @@ import API from "../api/api";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 function Home() {
   const navigate = useNavigate();
@@ -12,10 +12,13 @@ function Home() {
   const [body, setBody] = useState();
 
   const token = localStorage.getItem("token");
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+
+  const headers = useMemo(() => {
+    return {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
+  }, [token]);
   const data = {
     send_to: sendto,
     subject: subject,
@@ -41,10 +44,21 @@ function Home() {
   }
 
   useEffect(() => {
+    async function showUser() {
+      try {
+        const res = await API.post("api/auth/me", "", { headers });
+        if (res.status === 401) {
+          navigate("/login");
+        }
+      } catch (error) {
+        return navigate("/login");
+      }
+    }
     if (token === "" || localStorage.length === 0) {
       navigate("/login");
     }
-  });
+    showUser();
+  }, [headers, navigate, token]);
   return (
     <div>
       <Navbar />
