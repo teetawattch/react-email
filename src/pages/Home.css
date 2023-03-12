@@ -1,0 +1,45 @@
+.content {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 1rem 0;
+}
+
+.form {
+  background-color: #e8f2fa;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+  min-height: 50vh;
+}
+
+.formInput {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.btnForm {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.btnSendEmail {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  width: 150px;
+  background-color: #ffd082;
+}
+
+.btnSendEmail:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #ffa71a;
+}
+
+.note {
+  color: red;
+}

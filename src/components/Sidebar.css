@@ -1,0 +1,31 @@
+.side_bar {
+  position: relative;
+  width: 200px;
+  min-height: 100vh;
+  background-color: #faf3e8;
+  float: left;
+  transition: 0.5s;
+  margin-right: 1rem;
+}
+.item {
+  list-style-type: none;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+}
+.item:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #e8c996;
+}
+
+.side_bar a {
+  text-decoration: none;
+  color: #000;
+}
+
+@media (max-width: 500px) {
+  .side_bar {
+    width: 145px;
+  }
+}
