@@ -33,7 +33,7 @@ function Home() {
       }
     } catch (error) {
       if (error.response.status === 401 || token === "") {
-        navigate("/login");
+        return navigate("/login");
       } else {
         alert("something went wrong.");
       }

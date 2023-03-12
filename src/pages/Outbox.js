@@ -7,32 +7,33 @@ import { useNavigate } from "react-router-dom";
 
 function Outbox() {
   const [data, setData] = useState([]);
-  const token = localStorage.getItem("token");
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + token,
-  };
+
   const navigate = useNavigate();
-  async function getOutbox() {
-    try {
-      const res = await API.get("api/email/gets", {
-        headers: headers,
-      });
-      const json = await res.data.data;
-      setData(json);
-    } catch (error) {
-      if (error.response.status === 401 || token === "") {
-        return navigate("/login");
-      }
-    }
-  }
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
     if (token === "") {
       navigate("/login");
     }
+    async function getOutbox() {
+      try {
+        const res = await API.get("api/email/gets", {
+          headers: headers,
+        });
+        const json = await res.data.data;
+        setData(json);
+      } catch (error) {
+        if (error.response.status === 401 || token === "") {
+          navigate("/login");
+        }
+      }
+    }
     getOutbox();
-  });
+  }, [navigate]);
 
   return (
     <div>

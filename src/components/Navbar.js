@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { useState, useEffect } from "react";
 import API from "../api/api";
 
-function Navbar() {
+const Navbar = () => {
   const [username, setUsername] = useState();
 
   useEffect(() => {
@@ -12,9 +12,13 @@ function Navbar() {
       Authorization: "Bearer " + token,
     };
     async function showUser() {
-      const res = await API.post("api/auth/me", "", { headers });
-      const data = await res.data;
-      setUsername(data.name);
+      try {
+        const res = await API.post("api/auth/me", "", { headers });
+        const data = await res.data;
+        setUsername(data.name);
+      } catch (error) {
+        console.log(error.response);
+      }
     }
     showUser();
   }, []);

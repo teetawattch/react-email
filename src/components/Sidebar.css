@@ -1,9 +1,8 @@
 .side_bar {
-  position: relative;
-  width: 200px;
+  float: left;
+  width: 150px;
   min-height: 100vh;
   background-color: #faf3e8;
-  float: left;
   transition: 0.5s;
   margin-right: 1rem;
 }
