@@ -37,8 +37,9 @@ function Home() {
   }
 
   useEffect(() => {
-    if (token === "") {
+    if (token === "" || localStorage.length === 0) {
       navigate("/login");
+      
     }
   });
   return (
