@@ -17,7 +17,7 @@ function Navbar() {
 
   useEffect(() => {
     showUser();
-  }, []);
+  });
   return (
     <ul className="navbar row">
       <div className="logo">
