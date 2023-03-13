@@ -29,6 +29,7 @@ function Home() {
       const res = await API.post("api/email/send", data, {
         headers: headers,
       });
+      console.log(res)
       if (res.status === 202 || res.status === 200) {
         navigate("/outbox");
       } else {
