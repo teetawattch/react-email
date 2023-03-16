@@ -1,14 +1,14 @@
 import "./Login.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api/api";
+import API from "../api/axios";
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const navigate = useNavigate();
 
   async function getLogin() {
+    const navigate = useNavigate();
     const data = {
       email: email,
       password: password,
@@ -38,6 +38,7 @@ function Login() {
             type="text"
             placeholder="email"
             id="email_login"
+            data-testid="email-input"
             className="formInput"
             onInput={(e) => setEmail(e.target.value)}
           />
@@ -45,13 +46,14 @@ function Login() {
             type="password"
             placeholder="password"
             id="password_login"
+            data-testid="password-input"
             className="formInput"
             onInput={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="btnFormLogin">
           <a href="/register">Register?</a>
-          <button className="btnLogin" onClick={getLogin}>
+          <button className="btnLogin" data-testid="login-btn" onClick={getLogin}>
             Login
           </button>
         </div>

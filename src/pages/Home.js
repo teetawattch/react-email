@@ -1,5 +1,5 @@
 import "./Home.css";
-import API from "../api/api";
+import API from "../api/axios";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";

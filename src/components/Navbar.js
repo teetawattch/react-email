@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import { useState, useEffect } from "react";
-import API from "../api/api";
+import API from "../api/axios";
 
 const Navbar = () => {
   const [username, setUsername] = useState();

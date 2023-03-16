@@ -2,7 +2,7 @@ import "./Outbox.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useState, useEffect } from "react";
-import API from "../api/api";
+import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 function Outbox() {
