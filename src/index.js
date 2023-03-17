@@ -7,6 +7,9 @@ import Outbox from "./pages/Outbox";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Draft from "./pages/Draft";
+import EditDraft from "./pages/EditDraft";
+
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/draft",
+    element: <Draft />,
+  },
+  {
+    path: "/draft/edit/:uid",
+    element: <EditDraft />,
   },
 ]);
 

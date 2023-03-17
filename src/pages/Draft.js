@@ -1,14 +1,19 @@
-import "./Outbox.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useState, useEffect } from "react";
 import API from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import "./Draft.css";
 
-function Outbox() {
+function Draft() {
   const [data, setData] = useState([]);
 
   const navigate = useNavigate();
+
+  function editDraft(uid) {
+    navigate("/draft/edit/" + uid);
+    // console.log(uid);
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,9 +24,9 @@ function Outbox() {
     if (token === "") {
       navigate("/login");
     }
-    async function getOutbox() {
+    async function getDraf() {
       try {
-        const res = await API.get("api/email/gets", {
+        const res = await API.get("api/email/draft/gets", {
           headers: headers,
         });
         const json = await res.data.data;
@@ -32,20 +37,20 @@ function Outbox() {
         }
       }
     }
-    getOutbox();
+    getDraf();
   }, [navigate]);
 
   return (
     <div>
       <Navbar />
-      <Sidebar status="outbox" />
+      <Sidebar status="draft" />
       <div className="content">
         <div className="header">
-          <h2>Outbox</h2>
+          <h2>Draft</h2>
         </div>
         {data.map((e) => {
           return (
-            <div className="card" key={e.uid}>
+            <div className="card" key={e.uid} onClick={() => editDraft(e.uid)}>
               <div className="subjectEmail">
                 <h4>{e.subject}</h4>
               </div>
@@ -62,4 +67,4 @@ function Outbox() {
   );
 }
 
-export default Outbox;
+export default Draft;

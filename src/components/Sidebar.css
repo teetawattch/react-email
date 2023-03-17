@@ -18,6 +18,11 @@
   background-color: #e8c996;
 }
 
+.active {
+  color: #fff;
+  background-color: #e8c996;
+}
+
 .side_bar a {
   text-decoration: none;
   color: #000;

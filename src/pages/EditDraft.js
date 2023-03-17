@@ -1,15 +1,15 @@
-import "./Home.css";
 import API from "../api/axios";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 
-function Home() {
+function EditDraft() {
   const navigate = useNavigate();
-  const [sendto, setSendto] = useState();
-  const [subject, setSubject] = useState();
-  const [body, setBody] = useState();
+  const [sendto, setSendto] = useState("");
+  const [subject, setSubject] = useState("");
+  const [body, setBody] = useState("");
+  const [uid, setUid] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -23,6 +23,7 @@ function Home() {
     send_to: sendto,
     subject: subject,
     body: body,
+    uid: uid,
   };
   async function sendEmail() {
     try {
@@ -77,11 +78,25 @@ function Home() {
       navigate("/login");
     }
     showUser();
+    async function getDraftEmail() {
+      const uid = window.location.href.split("/")[5];
+      setUid(uid);
+      const res = await API.get("api/email/draft/get/" + uid, { headers });
+
+      if (res.status === 200) {
+        setSendto(res.data.data.email_send_to);
+        setSubject(res.data.data.subject);
+        setBody(res.data.data.body);
+      } else {
+        navigate("/draft");
+      }
+    }
+    getDraftEmail();
   }, [headers, navigate, token]);
   return (
     <div>
       <Navbar />
-      <Sidebar status="home" />
+      <Sidebar status="draft" />
       <div className="content">
         <div className="header">
           <h2>New Email</h2>
@@ -93,6 +108,7 @@ function Home() {
             id="send_to"
             className="formInput"
             onInput={(e) => setSendto(e.target.value)}
+            value={sendto}
           />
           <input
             type="text"
@@ -100,6 +116,7 @@ function Home() {
             id="subject"
             className="formInput"
             onInput={(e) => setSubject(e.target.value)}
+            value={subject}
           />
           <textarea
             placeholder="body"
@@ -107,6 +124,7 @@ function Home() {
             className="formInput"
             rows={10}
             onInput={(e) => setBody(e.target.value)}
+            value={body}
           />
           <div className="btnForm">
             <button className="btnSendEmail" onClick={sendEmail}>
@@ -122,4 +140,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default EditDraft;

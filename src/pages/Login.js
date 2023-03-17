@@ -6,15 +6,18 @@ import API from "../api/axios";
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
   async function getLogin() {
-    const navigate = useNavigate();
+    const headers = {
+      "Content-Type": "application/json",
+    };
     const data = {
       email: email,
       password: password,
     };
     try {
-      const res = await API.post("api/auth/login", data);
+      const res = await API.post("api/auth/login", data, { headers });
       const json = await res.data;
 
       localStorage.setItem("token", json.access_token);
@@ -53,7 +56,11 @@ function Login() {
         </div>
         <div className="btnFormLogin">
           <a href="/register">Register?</a>
-          <button className="btnLogin" data-testid="login-btn" onClick={getLogin}>
+          <button
+            className="btnLogin"
+            data-testid="login-btn"
+            onClick={getLogin}
+          >
             Login
           </button>
         </div>

@@ -24,6 +24,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 10px;
 }
 
 .btnSendEmail {
@@ -38,6 +39,20 @@
   cursor: pointer;
   color: #fff;
   background-color: #ffa71a;
+}
+
+.btnSaveDraft {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  width: 150px;
+  background-color: hsl(207, 64%, 85%);
+}
+
+.btnSaveDraft:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #96c3e8;
 }
 
 .note {
